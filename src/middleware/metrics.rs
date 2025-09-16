@@ -304,7 +304,6 @@ where
 pub(crate) mod prometheus {
     use actix_web::{dev, http::StatusCode};
     use futures_util::future::{self, LocalBoxFuture};
-    use opentelemetry_sdk::metrics::MetricError;
     use prometheus::{Encoder, Registry, TextEncoder};
 
     /// Prometheus request metrics service
@@ -332,7 +331,7 @@ pub(crate) mod prometheus {
                     name: "encode_failure",
                     target: env!("CARGO_PKG_NAME"),
                     name = "encode_failure",
-                    error = MetricError::Other(err.to_string()).to_string(),
+                    error = err.to_string(),
                     ""
                 );
             }
